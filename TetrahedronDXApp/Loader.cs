@@ -24,17 +24,17 @@ namespace SimpleDXApp
 				new Renderer.VertexDataStruct // bottom left 1
                 {
 					position = new Vector4(-1.0f, -1.0f, -1.0f, 1.0f),
-					color = new Vector4(0.0f, 0.0f, 1.0f, 1.0f)
+					color = new Vector4(0.0f, 1.0f, 1.0f, 1.0f)
 				},
 				new Renderer.VertexDataStruct // bottom right 2
                 {
 					position = new Vector4(1.0f, -1.0f, -1.0f, 1.0f),
-					color = new Vector4(0.0f, 0.0f, 1.0f, 1.0f)
+					color = new Vector4(1.0f, 0.0f, 0.0f, 1.0f)
 				},
 				new Renderer.VertexDataStruct // bottom back 3
                 {
 					position = new Vector4(0.0f, -1.0f, 1.0f, 1.0f),
-					color = new Vector4(0.0f, 0.0f, 1.0f, 1.0f)
+					color = new Vector4(1.0f, 0.0f, 1.0f, 1.0f)
 				}
 			};
 
