@@ -11,7 +11,10 @@ namespace SimpleDXApp
 {
     class Game : IDisposable
     {
-        private const float MOVE_STEP = 0.1f;
+        private const float MOVE_STEP = 0.05f;
+		private float _x;
+		private float _y;
+		private float _z;
 
 		private RenderForm _renderForm;
 
@@ -57,19 +60,27 @@ namespace SimpleDXApp
 				_firstRun = false;
 			}
 			float xstep = 0;
+			float zstep = 0;
 			float ystep = 0;
 			_inputHandler.Update();
+			if (_inputHandler.Forward)
+				zstep += MOVE_STEP;
+			if (_inputHandler.Backward)
+				zstep -= MOVE_STEP;
 			if (_inputHandler.Up)
 				ystep += MOVE_STEP;
 			if (_inputHandler.Down)
 				ystep -= MOVE_STEP;
 			if (_inputHandler.Left)
-				xstep += MOVE_STEP;
-			if (_inputHandler.Right)
 				xstep -= MOVE_STEP;
+			if (_inputHandler.Right)
+				xstep += MOVE_STEP;
+
 			_y += ystep;
 			_x += xstep;
-			_cube.MoveBy(-xstep, 0, ystep);
+			_z += zstep;
+			
+            _camera.MoveBy(xstep, ystep, zstep);
 			_timeHelper.Update();
 			_renderForm.Text = "FPS: " + _timeHelper.FPS.ToString();
 

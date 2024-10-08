@@ -17,6 +17,8 @@ namespace SimpleDXApp
 		public bool Right { get; private set; }
 		public bool Up { get; private set; }
 		public bool Down { get; private set; }
+		public bool Forward { get; private set; }
+		public bool Backward { get; private set; }
 
 		public InputHandler()
 		{
@@ -31,18 +33,36 @@ namespace SimpleDXApp
 			keyboardState = keyboard.GetCurrentState();
 
 			if (keyboardState.IsPressed(Key.W))
-				Up = true;
+				Forward = true;
 			else
-				Up = false;
+				Forward = false;
+
 			if (keyboardState.IsPressed(Key.A))
 				Left = true;
 			else
 				Left = false;
+
 			if (keyboardState.IsPressed(Key.D))
 				Right = true;
 			else
 				Right = false;
+
 			if (keyboardState.IsPressed(Key.S))
+				Backward = true;
+			else
+				Backward = false;
+
+			if (keyboardState.IsPressed(Key.D))
+				Right = true;
+			else
+				Right = false;
+
+			if (keyboardState.IsPressed(Key.Space))
+				Up = true;
+			else
+				Up = false;
+
+			if (keyboardState.IsPressed(Key.LeftShift))
 				Down = true;
 			else
 				Down = false;
