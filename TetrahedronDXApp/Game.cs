@@ -11,7 +11,8 @@ namespace SimpleDXApp
 {
     class Game : IDisposable
     {
-        private RenderForm _renderForm;
+		private const float MOVE_STEP = 0.05f;
+		private RenderForm _renderForm;
 
         private MeshObject _cube;
         private Camera _camera;
@@ -19,7 +20,11 @@ namespace SimpleDXApp
         private DirectX3DGraphics _directX3DGraphics;
         private Renderer _renderer;
 
-        private TimeHelper _timeHelper;
+		private InputHandler _inputHandler;
+		private float _x;
+		private float _y;
+
+		private TimeHelper _timeHelper;
 
         public Game()
         {
@@ -30,7 +35,8 @@ namespace SimpleDXApp
             _renderer.CreateConstantBuffer();
 
             Loader loader = new Loader(_directX3DGraphics);
-            _cube = loader.MakeTetrahedron(new Vector4(0.0f, 0.0f, 0.0f, 1.0f), 0.0f, 0.0f, 0.0f);
+			_inputHandler = new InputHandler();
+			_cube = loader.MakeTetrahedron(new Vector4(0.0f, 0.0f, 0.0f, 1.0f), 0.0f, 0.0f, 0.0f);
             _camera = new Camera(new Vector4(0.0f, 0.0f, -4.0f, 0.0f));
             _timeHelper = new TimeHelper();
             loader.Dispose();
@@ -48,19 +54,34 @@ namespace SimpleDXApp
 
         public void RenderLoopCallback()
         {
-            if (_firstRun)
-            {
-                RenderFormResizedCallback(this, EventArgs.Empty);
-                _firstRun = false;
-            }
-            _timeHelper.Update();
-            _renderForm.Text = "FPS: " + _timeHelper.FPS.ToString();
-            _cube.YawBy(Cursor.Position.X/100f);
-            //_cube.RollBy(_timeHelper.DeltaT * MathUtil.TwoPi * 0.05f);
-            _cube.PitchBy(Cursor.Position.Y / 100f);
+			if (_firstRun)
+			{
+				RenderFormResizedCallback(this, EventArgs.Empty);
+				_firstRun = false;
+			}
+			float xstep = 0;
+			float ystep = 0;
+			_inputHandler.Update();
+			if (_inputHandler.Up)
+				ystep += MOVE_STEP;
+			if (_inputHandler.Down)
+				ystep -= MOVE_STEP;
+			if (_inputHandler.Left)
+				xstep += MOVE_STEP;
+			if (_inputHandler.Right)
+				xstep -= MOVE_STEP;
+			_y += ystep;
+			_x += xstep;
+			_cube.MoveBy(-xstep, 0, ystep);
+			_timeHelper.Update();
+			_renderForm.Text = "FPS: " + _timeHelper.FPS.ToString();
+            
+            _camera.YawBy(Cursor.Position.X / 100f);
+			_camera.PitchBy(Cursor.Position.Y / 100f);
 
             Matrix viewMatrix = _camera.GetViewMatrix();
             Matrix projectionMatrix = _camera.GetProjectionMatrix();
+            
 
             _renderer.BeginRender();
 
