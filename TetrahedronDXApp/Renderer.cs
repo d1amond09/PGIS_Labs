@@ -20,7 +20,7 @@ namespace SimpleDXApp
         public struct VertexDataStruct
         {
             public Vector4 position;
-            public Vector4 color;
+            public Vector2 texCoord;
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -63,7 +63,7 @@ namespace SimpleDXApp
             {
                 new InputElement("POSITION", 0, Format.R32G32B32A32_Float,
                     0, 0),
-                new InputElement("COLOR", 0, Format.R32G32B32A32_Float,
+                new InputElement("TEXCOORD", 0, Format.R32G32_Float,
                     16, 0)
             };
 

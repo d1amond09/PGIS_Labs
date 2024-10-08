@@ -1,13 +1,13 @@
 ﻿struct vertexData
 {
 	float4 position : POSITION;
-	float4 color    : COLOR;
+    float2 texCoord : TEXCOORD0;
 };
 
 struct pixelData
 {
 	float4 position : SV_POSITION;
-	float4 color    : COLOR;
+    float2 TexCoord : TEXCOORD0;
 };
 
 cbuffer perObjectData : register(b0) {
@@ -27,7 +27,7 @@ pixelData vertexShader(vertexData input) {
 
 	output.position =
 		mul(position, worldViewProjectionMatrix);
-	output.color = input.color;
+    output.TexCoord = input.texCoord;
 
 	return output;
 }

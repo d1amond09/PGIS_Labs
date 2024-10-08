@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using SharpDX;
 using SharpDX.Windows;
 
@@ -54,9 +55,9 @@ namespace SimpleDXApp
             }
             _timeHelper.Update();
             _renderForm.Text = "FPS: " + _timeHelper.FPS.ToString();
-            _cube.YawBy(_timeHelper.DeltaT * MathUtil.TwoPi * 0.05f);
-            _cube.RollBy(_timeHelper.DeltaT * MathUtil.TwoPi * 0.05f);
-            _cube.PitchBy(_timeHelper.DeltaT * MathUtil.TwoPi * 0.05f);
+            _cube.YawBy(Cursor.Position.X/100f);
+            //_cube.RollBy(_timeHelper.DeltaT * MathUtil.TwoPi * 0.05f);
+            _cube.PitchBy(Cursor.Position.Y / 100f);
 
             Matrix viewMatrix = _camera.GetViewMatrix();
             Matrix projectionMatrix = _camera.GetProjectionMatrix();
