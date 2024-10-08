@@ -83,8 +83,9 @@ namespace SimpleDXApp
             _camera.MoveBy(xstep, ystep, zstep);
 			_timeHelper.Update();
 			_renderForm.Text = "FPS: " + _timeHelper.FPS.ToString();
-
-			_camera.YawBy(Cursor.Position.X / 100f);
+			
+            _cube.YawBy(_timeHelper.DeltaT * MathUtil.TwoPi * 0.05f);
+			_camera.CameraYawBy(Cursor.Position.X / 100f);
 			_camera.PitchBy(Cursor.Position.Y / 100f);
 
 			Matrix viewMatrix = _camera.GetViewMatrix();

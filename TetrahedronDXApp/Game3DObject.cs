@@ -36,11 +36,17 @@ namespace SimpleDXApp
 
         public virtual void YawBy(float deltaYaw)
         {
-            _yaw = deltaYaw;
+            _yaw += deltaYaw;
             LimitAngleByPlusMinusPi(ref _yaw);
         }
 
-        public virtual void PitchBy(float deltaPitch)
+		public virtual void CameraYawBy(float deltaYaw)
+		{
+			_yaw = deltaYaw;
+			LimitAngleByPlusMinusPi(ref _yaw);
+		}
+
+		public virtual void PitchBy(float deltaPitch)
         {
             _pitch = deltaPitch;
             LimitAngleByPlusMinusPi(ref _pitch);
