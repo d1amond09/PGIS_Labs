@@ -27,7 +27,6 @@ namespace SimpleDXApp
 
 		public void Update()
 		{
-			// Обновляем состояние клавиатуры
 			keyboardState = keyboard.GetCurrentState();
 
 			if (keyboardState.IsPressed(Key.W))
