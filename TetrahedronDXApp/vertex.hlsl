@@ -1,13 +1,13 @@
 ﻿struct vertexData
 {
 	float4 position : POSITION;
-    float2 texCoord : TEXCOORD0;
+    float2 color : COLOR;
 };
 
 struct pixelData
 {
 	float4 position : SV_POSITION;
-    float2 TexCoord : TEXCOORD0;
+    float4 color : COLOR;
 };
 
 cbuffer perObjectData : register(b0) {
