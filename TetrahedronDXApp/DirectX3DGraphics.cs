@@ -92,7 +92,7 @@ namespace SimpleDXApp
 
             _rasterizerStateDescription = new RasterizerStateDescription()
             {
-                FillMode = FillMode.Solid,
+                FillMode = FillMode.Wireframe,
                 CullMode = CullMode.None,
                 IsFrontCounterClockwise = true,
                 IsMultisampleEnabled = true,

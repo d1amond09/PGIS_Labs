@@ -30,8 +30,8 @@ namespace SimpleDXApp
             _renderer.CreateConstantBuffer();
 
             Loader loader = new Loader(_directX3DGraphics);
-            _cube = loader.MakeTetrahedron(new Vector4(0.0f, 0.0f, 0.0f, 1.0f), 0.0f, 0.0f, 0.0f);
-            _camera = new Camera(new Vector4(0.0f, 0.0f, -4.0f, 0.0f));
+            _cube = loader.MakeSineSurface(new Vector4(0.0f, 0.0f, 0.0f, 1.0f), 0.0f, 0.0f, 0.0f, 2000);
+            _camera = new Camera(new Vector4(0.0f, 0.0f, -16.0f, 0.0f));
             _timeHelper = new TimeHelper();
             loader.Dispose();
             loader = null;
