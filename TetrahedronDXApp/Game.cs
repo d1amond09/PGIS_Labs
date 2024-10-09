@@ -82,7 +82,6 @@ namespace SimpleDXApp
 			_x += xstep;
 			_z += zstep;
 
-            // Перемещение камеры
             _camera.MoveForward(zstep);
             _camera.MoveRight(xstep);
             _camera.MoveBy(0f, ystep, 0f);

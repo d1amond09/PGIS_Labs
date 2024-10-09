@@ -4,12 +4,6 @@ namespace SimpleDXApp
 {
 	public class TextureLoader
 	{
-		/// <summary>
-		/// Loads a bitmap using WIC.
-		/// </summary>
-		/// <param name="deviceManager"></param>
-		/// <param name="filename"></param>
-		/// <returns></returns>
 		public static SharpDX.WIC.BitmapSource LoadBitmap(SharpDX.WIC.ImagingFactory2 factory, string filename)
 		{
 			var bitmapDecoder = new SharpDX.WIC.BitmapDecoder(
@@ -31,19 +25,11 @@ namespace SimpleDXApp
 			return formatConverter;
 		}
 
-		/// <summary>
-		/// Creates a <see cref="SharpDX.Direct3D11.Texture2D"/> from a WIC <see cref="SharpDX.WIC.BitmapSource"/>
-		/// </summary>
-		/// <param name="device">The Direct3D11 device</param>
-		/// <param name="bitmapSource">The WIC bitmap source</param>
-		/// <returns>A Texture2D</returns>
 		public static SharpDX.Direct3D11.Texture2D CreateTexture2DFromBitmap(SharpDX.Direct3D11.Device device, SharpDX.WIC.BitmapSource bitmapSource)
 		{
-			// Allocate DataStream to receive the WIC image pixels
 			int stride = bitmapSource.Size.Width * 4;
 			using (var buffer = new SharpDX.DataStream(bitmapSource.Size.Height * stride, true, true))
 			{
-				// Copy the content of the WIC to the buffer
 				bitmapSource.CopyPixels(stride, buffer);
 				return new SharpDX.Direct3D11.Texture2D(device, new SharpDX.Direct3D11.Texture2DDescription()
 				{
