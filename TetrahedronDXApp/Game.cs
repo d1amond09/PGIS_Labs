@@ -36,8 +36,8 @@ namespace SimpleDXApp
             _renderer.CreateConstantBuffer();
 			_inputHandler = new InputHandler();
 			Loader loader = new Loader(_directX3DGraphics);
-            _cube = loader.MakeSineSurface(new Vector4(0.0f, 0.0f, 0.0f, 1.0f), 0.0f, 0.0f, 0.0f, 2000);
-            _camera = new Camera(new Vector4(0.0f, 0.0f, -16.0f, 0.0f));
+            _cube = loader.MakeSineSurface(new Vector4(0.0f, 0.0f, 0.0f, 1.0f), 0.0f, 0.0f, 0.0f, 500);
+            _camera = new Camera(new Vector4(0.0f, 3.0f, -16.0f, 0.0f));
             _timeHelper = new TimeHelper();
             loader.Dispose();
             loader = null;
@@ -59,10 +59,12 @@ namespace SimpleDXApp
 				RenderFormResizedCallback(this, EventArgs.Empty);
 				_firstRun = false;
 			}
-			float xstep = 0;
-			float zstep = 0;
-			float ystep = 0;
+
 			_inputHandler.Update();
+
+			float xstep = 0;
+			float ystep = 0;
+			float zstep = 0;
 			if (_inputHandler.Forward)
 				zstep += MOVE_STEP;
 			if (_inputHandler.Backward)
@@ -72,21 +74,27 @@ namespace SimpleDXApp
 			if (_inputHandler.Down)
 				ystep -= MOVE_STEP;
 			if (_inputHandler.Left)
-				xstep -= MOVE_STEP;
-			if (_inputHandler.Right)
 				xstep += MOVE_STEP;
+			if (_inputHandler.Right)
+				xstep -= MOVE_STEP;
 
 			_y += ystep;
 			_x += xstep;
 			_z += zstep;
-			
-            _camera.MoveBy(xstep, ystep, zstep);
+
+            // Перемещение камеры
+            _camera.MoveForward(zstep);
+            _camera.MoveRight(xstep);
+            _camera.MoveBy(0f, ystep, 0f);
+
 			_timeHelper.Update();
 			_renderForm.Text = "FPS: " + _timeHelper.FPS.ToString();
 			
             _cube.YawBy(_timeHelper.DeltaT * MathUtil.TwoPi * 0.05f);
-			_camera.CameraYawBy(Cursor.Position.X / 100f);
-			_camera.PitchBy(Cursor.Position.Y / 100f);
+            //_cube.PitchBy(_timeHelper.DeltaT * MathUtil.TwoPi * 0.005f);
+            //_cube.RollBy(_timeHelper.DeltaT * MathUtil.TwoPi * 0.005f);
+			_camera.YawBy(Cursor.Position.X / 200f);
+			_camera.PitchBy(Cursor.Position.Y / 200f);
 
 			Matrix viewMatrix = _camera.GetViewMatrix();
             Matrix projectionMatrix = _camera.GetProjectionMatrix();

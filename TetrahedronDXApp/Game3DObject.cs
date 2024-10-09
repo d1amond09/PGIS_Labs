@@ -28,7 +28,7 @@ namespace SimpleDXApp
             _roll = roll;
         }
 
-        private void LimitAngleByPlusMinusPi(ref float angle)
+        protected void LimitAngleByPlusMinusPi(ref float angle)
         {
             if (angle > MathUtil.Pi) angle -= MathUtil.TwoPi;
             else if (angle < -MathUtil.Pi) angle += MathUtil.TwoPi;
@@ -40,21 +40,15 @@ namespace SimpleDXApp
             LimitAngleByPlusMinusPi(ref _yaw);
         }
 
-		public virtual void CameraYawBy(float deltaYaw)
-		{
-			_yaw = deltaYaw;
-			LimitAngleByPlusMinusPi(ref _yaw);
-		}
-
 		public virtual void PitchBy(float deltaPitch)
         {
-            _pitch = deltaPitch;
+            _pitch += deltaPitch;
             LimitAngleByPlusMinusPi(ref _pitch);
         }
 
         public virtual void RollBy(float deltaRoll)
         {
-            _roll = deltaRoll;
+            _roll += deltaRoll;
             LimitAngleByPlusMinusPi(ref _roll);
         }
 
