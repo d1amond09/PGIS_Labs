@@ -31,7 +31,7 @@ pixelData vertexShader(vertexData input)
     float distance = sqrt(position.x * position.x + position.z * position.z); 
     float y = sin(distance); 
 
-    y = max(0.0f, min(y, 1.0f)); 
+    //y = max(0.0f, min(y, 1.0f)); 
 
     position.y = y;
 

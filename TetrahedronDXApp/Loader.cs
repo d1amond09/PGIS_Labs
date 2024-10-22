@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using SharpDX;
-using SharpDX.D3DCompiler;
-using SharpDX.Direct3D11;
 
 namespace SimpleDXApp
 {
@@ -28,13 +26,13 @@ namespace SimpleDXApp
 			{
 				for (int j = 0; j < resolution; j++)
 				{
-					float x = ((float)i / (resolution - 1)) * size - halfSize; 
-					float z = ((float)j / (resolution - 1)) * size - halfSize; 
+					float x = ((float)i / (resolution - 1)) * size - halfSize;
+					float z = ((float)j / (resolution - 1)) * size - halfSize;
 
 					vertices[i * resolution + j] = new Renderer.VertexDataStruct
 					{
 						position = new Vector4(x, 0f, z, 1.0f),
-						color = new Vector4(0f, 0f, 0f, 1.0f) 
+						color = new Vector4(0f, 0f, 0f, 1.0f)
 					};
 
 					// Индексы для каркасной модели
